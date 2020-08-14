@@ -1,0 +1,3 @@
+<table name="UserDetails">
+<column name="id" type="integer"></column>
+</table>
