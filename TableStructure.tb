@@ -1,4 +1,4 @@
-<table name="UserDetails">
-<column name="id" type="integer"></column>
-<column name="Name" type="integer"></column>
+<table name="UserDetails" tid=1>
+<column name="id" type="integer" cid=1></column>
+<column name="Name" type="integer" cid=2></column>
 </table>
