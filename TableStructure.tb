@@ -1,4 +1,12 @@
-<table name="UserDetails" tid=1>
-<column name="id" type="integer" cid=1></column>
-<column name="Name" type="integer" cid=2></column>
-</table>
+<UserDetails>
+<id type="integer"></id>
+<Name type="integer"></Name>
+</UserDetails>
+
+<NomineeDetails>
+<id type="integer"></id>
+<NomName type="integer"></NomName>
+</NomineeDetails>
+
+
+
