@@ -4,7 +4,7 @@
 </UserDetails>
 
 <NomineeDetails>
-<id type="integer"></id>
+<nomid type="integer"></nomid>
 <NomName type="integer"></NomName>
 </NomineeDetails>
 
