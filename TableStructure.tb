@@ -1,11 +1,12 @@
 <UserDetails>
-<id type="integer"></id>
-<Name type="integer"></Name>
+<id type="integer"/> 
+<Name type="integer"/>
 </UserDetails>
 
 <NomineeDetails>
-<nomid type="integer"></nomid>
-<NomName type="integer"></NomName>
+<nomid type="integer"/>
+<NomName type="integer">
+<isAlive type="boolean"/> 
 </NomineeDetails>
 
 
