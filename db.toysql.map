@@ -1,0 +1,4 @@
+<name="UserDetails" map="1" type="Table" index=1/> 
+<name="id" map="1.1" type="Number">
+<name="Name" type="String"/> 
+<name="IsAlive" type="Boolean"/>

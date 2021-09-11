@@ -3,9 +3,3 @@
 <Name type="String"/>
 <IsAlive type="Boolean"/>
 </UserDetails>
-<nomineedetails>
-<id type="Number"/> 
-<NomineeName type="String"/>
-<IsAlive type="Boolean"/>
-</nomineedetails>
-
