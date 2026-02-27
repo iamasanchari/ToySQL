@@ -1,0 +1,25 @@
+{
+  "name": "toysql",
+  "version": "2.0.0",
+  "description": "A lightweight in-memory SQL engine for JavaScript — supports CREATE, INSERT, SELECT, UPDATE, DELETE, and more.",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "exports": {
+    ".": "./src/index.js"
+  },
+  "scripts": {
+    "test": "node test/index.test.js",
+    "example": "node examples/ecommerce.js"
+  },
+  "keywords": [
+    "sql",
+    "in-memory",
+    "database",
+    "query",
+    "toy",
+    "engine"
+  ],
+  "author": "",
+  "license": "MIT",
+  "type": "module"
+}

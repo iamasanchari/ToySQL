@@ -1,5 +1,0 @@
-<UserDetails>
-<id type="Number"/> 
-<Name type="String"/>
-<IsAlive type="Boolean"/>
-</UserDetails>
