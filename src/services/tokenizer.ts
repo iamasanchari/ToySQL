@@ -1,12 +1,18 @@
-import { KEYWORDS } from '../models/types.js';
+import { KEYWORDS, type Token } from '../models/types.js';
 
 /**
- * Tokenizes a SQL string into an array of tokens.
- * @param {string} sql
- * @returns {import('../models/types.js').Token[]}
+ * Tokenizes a raw SQL string into a flat array of typed tokens.
+ *
+ * Handles:
+ * - String literals (single and double quoted, with escape doubling)
+ * - Integers and floats (including negative numbers)
+ * - Two-character operators: `>=`, `<=`, `<>`, `!=`
+ * - Single-char punctuation: `= < > ( ) , . ; *`
+ * - Identifiers and SQL keywords
+ * - Line comments (`-- ...`)
  */
-export function tokenize(sql) {
-  const tokens = [];
+export function tokenize(sql: string): Token[] {
+  const tokens: Token[] = [];
   let i = 0;
   sql = sql.trim();
 
@@ -20,7 +26,7 @@ export function tokenize(sql) {
       continue;
     }
 
-    // String literal (single or double quoted)
+    // String literal (single or double quoted, '' escape supported)
     if (sql[i] === "'" || sql[i] === '"') {
       const quote = sql[i];
       let str = '';
@@ -40,7 +46,7 @@ export function tokenize(sql) {
       continue;
     }
 
-    // Number (including negative)
+    // Number literal (including leading negative sign)
     if (/[0-9]/.test(sql[i]) || (sql[i] === '-' && /[0-9]/.test(sql[i + 1]))) {
       let num = '';
       if (sql[i] === '-') num += sql[i++];
@@ -49,18 +55,15 @@ export function tokenize(sql) {
       continue;
     }
 
-    // Multi-char operators
-    const two = sql.substr(i, 2);
+    // Two-character operators
+    const two = sql.substring(i, i + 2);
     if (['>=', '<=', '<>', '!=', '=='].includes(two)) {
-      tokens.push({
-        type: 'OP',
-        value: two === '==' ? '=' : two === '!=' ? '<>' : two,
-      });
+      tokens.push({ type: 'OP', value: two === '==' ? '=' : two === '!=' ? '<>' : two });
       i += 2;
       continue;
     }
 
-    // Single-char punctuation/operators
+    // Single-character punctuation / operators
     if ('=<>(),.;*'.includes(sql[i])) {
       tokens.push({ type: 'PUNCT', value: sql[i++] });
       continue;
@@ -71,15 +74,11 @@ export function tokenize(sql) {
       let word = '';
       while (i < sql.length && /[a-zA-Z_0-9]/.test(sql[i])) word += sql[i++];
       const upper = word.toUpperCase();
-      tokens.push({
-        type: KEYWORDS.has(upper) ? 'KW' : 'IDENT',
-        value: word,
-        upper,
-      });
+      tokens.push({ type: KEYWORDS.has(upper) ? 'KW' : 'IDENT', value: word, upper });
       continue;
     }
 
-    // Skip unknown characters
+    // Skip unrecognised characters
     i++;
   }
 
